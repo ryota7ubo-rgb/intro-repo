@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>自己紹介 | Portfolio</title>
+    <style>
+      :root {
+        --bg: #0b1020;
+        --bg-soft: #121a2d;
+        --surface: rgba(255, 255, 255, 0.06);
+        --surface-strong: rgba(255, 255, 255, 0.1);
+        --text: #eaf2ff;
+        --muted: #a8b7d4;
+        --primary: #7dd3fc;
+        --secondary: #c084fc;
+        --accent: #f9a8d4;
+        --line: rgba(255, 255, 255, 0.12);
+        --shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        font-family: "Segoe UI", "Yu Gothic UI", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+        background: radial-gradient(circle at top left, rgba(125, 211, 252, 0.15), transparent 30%), radial-gradient(circle at bottom right, rgba(192, 132, 252, 0.18), transparent 35%), var(--bg);
+        color: var(--text);
+        line-height: 1.8;
+      }
+      a { color: inherit; text-decoration: none; }
+      img { max-width: 100%; display: block; }
+      .container { width: min(1100px, calc(100% - 32px)); margin: 0 auto; }
+      .topbar {
+        position: sticky; top: 0; z-index: 50;
+        backdrop-filter: blur(12px);
+        background: rgba(11, 16, 32, 0.7);
+        border-bottom: 1px solid var(--line);
+      }
+      .nav {
+        display: flex; align-items: center; justify-content: space-between; min-height: 74px;
+      }
+      .brand { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.08em; }
+      .brand span { color: var(--primary); }
+      .nav-links {
+        display: flex; align-items: center; gap: 28px; color: var(--muted); font-size: 0.96rem;
+      }
+      .nav-links a:hover { color: var(--text); }
+      .button {
+        display: inline-flex; align-items: center; justify-content: center; padding: 14px 22px; border-radius: 999px; font-weight: 700; border: 1px solid transparent; transition: 0.2s ease;
+      }
+      .button.primary {
+        background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #08131d; box-shadow: 0 10px 30px rgba(125, 211, 252, 0.25);
+      }
+      .button.primary:hover { transform: translateY(-2px); }
+      .button.secondary { border-color: var(--line); background: rgba(255, 255, 255, 0.03); }
+      .hero { padding: 88px 0 64px; }
+      .hero-inner { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center; }
+      .eyebrow {
+        display: inline-block; padding: 8px 14px; background: rgba(125, 211, 252, 0.12); border: 1px solid rgba(125, 211, 252, 0.25); color: var(--primary); border-radius: 999px; font-size: 0.8rem; letter-spacing: 0.06em; margin-bottom: 18px;
+      }
+      h1 {
+        margin: 0; font-size: clamp(2.5rem, 5vw, 5rem); line-height: 1.06; letter-spacing: -0.04em;
+      }
+      .highlight {
+        background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent)); -webkit-background-clip: text; background-clip: text; color: transparent;
+      }
+      .lead { margin-top: 22px; max-width: 620px; font-size: 1.08rem; color: var(--muted); }
+      .cta-row { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 32px; }
+      .hero-meta { display: flex; flex-wrap: wrap; gap: 28px; margin-top: 36px; color: var(--muted); font-size: 0.94rem; }
+      .hero-meta strong { color: var(--text); font-size: 1.15rem; }
+      .profile-card {
+        position: relative; background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)); border: 1px solid var(--line); border-radius: 28px; padding: 20px; box-shadow: var(--shadow);
+      }
+      .profile-visual {
+        position: relative; overflow: hidden; border-radius: 24px; background: linear-gradient(135deg, rgba(125,211,252,0.18), rgba(192,132,252,0.18)); min-height: 520px; display: grid; place-items: center;
+      }
+      .avatar {
+        width: min(320px, 75%); aspect-ratio: 1; border-radius: 28px; background: linear-gradient(135deg, #e2e8f0, #94a3b8 30%, #334155 70%, #0f172a 100%); display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2); position: relative;
+      }
+      .avatar::before {
+        content: ""; position: absolute; width: 72%; height: 72%; border-radius: 50%; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.28); top: 13%;
+      }
+      .avatar::after {
+        content: ""; position: absolute; width: 86%; height: 38%; background: rgba(15, 23, 42, 0.35); border-radius: 50% 50% 42% 42% / 60% 60% 40% 40%; bottom: 12%;
+      }
+      .status-pill {
+        position: absolute; right: 18px; bottom: 18px; background: rgba(10, 17, 29, 0.75); border: 1px solid var(--line); color: var(--text); border-radius: 999px; padding: 10px 14px; font-size: 0.8rem;
+      }
+      section { padding: 48px 0; }
+      .section-head { margin-bottom: 28px; }
+      .section-head h2 { margin: 0; font-size: clamp(1.8rem, 3vw, 2.6rem); letter-spacing: -0.03em; }
+      .section-head p { margin-top: 12px; color: var(--muted); }
+      .about-grid, .cards-grid, .timeline { display: grid; gap: 24px; }
+      .about-grid { grid-template-columns: 1.1fr 0.9fr; }
+      .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 26px 22px; box-shadow: var(--shadow); }
+      .panel p { margin: 0; color: var(--muted); }
+      .mini-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 16px; }
+      .mini-list li { display: flex; align-items: center; gap: 12px; color: var(--muted); }
+      .mini-list li::before {
+        content: ""; width: 10px; height: 10px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--secondary)); box-shadow: 0 0 20px rgba(125, 211, 252, 0.7);
+      }
+      .cards-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .card { background: rgba(255, 255, 255, 0.04); border: 1px solid var(--line); border-radius: 22px; padding: 24px 20px; }
+      .icon {
+        width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; background: linear-gradient(135deg, rgba(125,211,252,0.22), rgba(192,132,252,0.18)); font-size: 1.3rem; margin-bottom: 18px;
+      }
+      .card h3 { margin: 0 0 8px; font-size: 1.2rem; }
+      .card p { margin: 0; color: var(--muted); }
+      .timeline { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .time-item {
+        position: relative; background: rgba(255,255,255,0.04); border: 1px solid var(--line); border-radius: 22px; padding: 24px 20px;
+      }
+      .time-item::before {
+        content: ""; position: absolute; left: 20px; top: -12px; width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--secondary)); box-shadow: 0 0 0 8px rgba(125, 211, 252, 0.12);
+      }
+      .time-year {
+        display: inline-block; margin-bottom: 12px; padding: 5px 10px; border-radius: 999px; background: rgba(125, 211, 252, 0.12); border: 1px solid rgba(125, 211, 252, 0.25); color: var(--primary); font-size: 0.8rem; font-weight: 700;
+      }
+      .time-item h3 { margin: 0 0 8px; }
+      .time-item p { margin: 0; color: var(--muted); }
+      .contact-box {
+        display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; background: linear-gradient(135deg, rgba(125,211,252,0.1), rgba(192,132,252,0.08)); border: 1px solid var(--line); border-radius: 26px; padding: 28px 24px;
+      }
+      .contact-box h3 { margin: 0 0 6px; font-size: clamp(1.5rem, 3vw, 2.2rem); }
+      .contact-box p { margin: 0; color: var(--muted); }
+      footer { padding: 24px 0 60px; color: var(--muted); text-align: center; }
+      @media (max-width: 900px) {
+        .hero-inner, .about-grid, .cards-grid, .timeline { grid-template-columns: 1fr; }
+        .nav-links { display: none; }
+      }
+      @media (max-width: 560px) {
+        .hero { padding-top: 64px; }
+        .cta-row { flex-direction: column; align-items: stretch; }
+        .button { width: 100%; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container nav">
+        <a href="#top" class="brand"><span>My</span> Portfolio</a>
+        <nav class="nav-links" aria-label="メインメニュー">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#history">History</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="container hero-inner">
+          <div>
+            <div class="eyebrow">HELLO, WORLD</div>
+            <h1>
+              こんにちは、<br />
+              <span class="highlight">私は〇〇giです</span>
+            </h1>
+            <p class="lead">
+              大学/専門学校で学んだことをもとに、常に新しいことに挑戦しています。<br />
+              「人の役に立つこと」を大切にしながら、技術と創造力を活かして成長を続けています。
+            </p>
+
+            <div class="cta-row">
+              <a class="button primary" href="#contact">お問い合わせ</a>
+              <a class="button secondary" href="#about">自己紹介を見る</a>
+            </div>
+
+            <div class="hero-meta">
+              <div><strong>3+</strong><br />年の経験</div>
+              <div><strong>10+</strong><br />制作物</div>
+              <div><strong>100%</strong><br />努力</div>
+            </div>
+          </div>
+
+          <div class="profile-card">
+            <div class="profile-visual">
+              <div class="avatar" aria-label="プロフィール画像のイメージ"></div>
+              <div class="status-pill">現在、学びを続けています</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about">
+        <div class="container">
+          <div class="section-head">
+            <h2>About Me</h2>
+            <p>自分を知ってもらうために、私のことを少しだけ紹介します。</p>
+          </div>
+
+          <div class="about-grid">
+            <div class="panel">
+              <p>
+                はじめまして。私は〇〇と申します。<br />
+                学生時代からWebやデザインに興味を持ち、日々学びながら制作活動を続けています。<br />
+                何かを作ることが好きで、アイデアを形にして、人に伝わる作品づくりに情熱を注いでいます。
+              </p>
+            </div>
+            <div class="panel">
+              <ul class="mini-list">
+                <li>興味分野：Web制作 / UIデザイン / プログラミング</li>
+                <li>好きなこと：新しい技術を試すこと / 学ぶこと / コミュニケーション</li>
+                <li>目標：自分の力で価値を生み、社会に貢献する</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills">
+        <div class="container">
+          <div class="section-head">
+            <h2>Skills</h2>
+            <p>これまでに取り組んできたことや得意なことです。</p>
+          </div>
+
+          <div class="cards-grid">
+            <article class="card">
+              <div class="icon">💻</div>
+              <h3>Web制作</h3>
+              <p>HTML / CSS / JavaScript を用いたサイト制作や改善を行っています。</p>
+            </article>
+            <article class="card">
+              <div class="icon">🎨</div>
+              <h3>デザイン</h3>
+              <p>ユーザーが見やすく、伝わりやすいレイアウトを意識した設計が得意です。</p>
+            </article>
+            <article class="card">
+              <div class="icon">🤝</div>
+              <h3>コミュニケーション</h3>
+              <p>相手の意図を理解し、丁寧に話し合いながら物事を進めることを大切にしています。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="history">
+        <div class="container">
+          <div class="section-head">
+            <h2>History</h2>
+            <p>これまでの歩みと、今の気持ちをまとめています。</p>
+          </div>
+
+          <div class="timeline">
+            <article class="time-item">
+              <span class="time-year">2019</span>
+              <h3>大学/専門学校入学</h3>
+              <p>情報系の学びを開始し、Webやプログラミングに興味を持つようになりました。</p>
+            </article>
+
+            <article class="time-item">
+              <span class="time-year">2022</span>
+              <h3>自主学習・制作活動</h3>
+              <p>個人でサイト制作やアプリ開発に取り組み、実践的なスキルを身につけました。</p>
+            </article>
+
+            <article class="time-item">
+              <span class="time-year">2025</span>
+              <h3>次のステージへ</h3>
+              <p>より多くの人に価値を届けられるよう、技術と人柄の両方を磨いています。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="container">
+          <div class="contact-box">
+            <div>
+              <h3>最後までご覧いただきありがとうございます</h3>
+              <p>興味を持っていただけたら、ぜひお気軽にご連絡ください。</p>
+            </div>
+            <a class="button primary" href="mailto:your-email@example.com">メールする</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">© 2026 My Portfolio</div>
+    </footer>
+  </body>
+</html>
